@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 816f899c65b7af44b9aff31d8497348d, type: 2}
+  - {fileID: 2100000, guid: 24a251b4f9c6632449a7ee7efe768bc2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 6039211039230130480}
   - component: {fileID: 6039211039230130481}
   m_Layer: 0
-  m_Name: Tower Mage 1
+  m_Name: Ice Tower
   m_TagString: Tawer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7466582787204459331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.271, y: 0.0027, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0007, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 7466582786743450651}
@@ -282,6 +282,7 @@ Transform:
   - {fileID: 7466582787098877110}
   - {fileID: 7466582787719303671}
   - {fileID: 7466582787553975735}
+  - {fileID: 1360771286176823844}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -330,8 +331,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6825687b2e2ff47aa21a63f510aa79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healPoint: 100
+  healPoint: 300
   curHP: 100
+  EffectType: 2
+  EffectStrength: 15
+  EffectDuration: 5
 --- !u!114 &7466582787204459328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,10 +345,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7466582787204459331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b54789c0aef1eac4094d534981d70a2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2312c41308b2f07478b570e2f428779b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  ProjectilePrefab: {fileID: 320949834696518096, guid: 777ab30de091e27449b4fe594e55ba36, type: 3}
+  Gun: {fileID: 9139613731593144048}
+  ProjectileSpeed: 0.3
+  ShootingRate: 1.5
+  ProjectileDamage: 80
+  Mode: 1
+  target: {fileID: 0}
+  Camera: {fileID: 0}
 --- !u!208 &6039211039230130480
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -616,3 +627,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &9139613731593144048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1360771286176823844}
+  m_Layer: 0
+  m_Name: Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1360771286176823844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139613731593144048}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.283, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7466582787204459334}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -21,7 +21,7 @@ public class EnemyHeal : MonoBehaviour
     {
         if (currentHealthPoint <= 0)//������ ����� ���� �� ������ 0
         {
-            intelectCreepsScript.Death();
+          //  intelectCreepsScript.Death();
         }
     }
 }

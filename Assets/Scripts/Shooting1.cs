@@ -18,7 +18,7 @@ public class Shooting1 : MonoBehaviour //by serega
     private LayerMask Mask;
     private ARRaycastManager RaycastManager;
 
-    public float ProjectileSpeed = 0.4f;
+    public float ProjectileSpeed = 0.1f;
     public float ShootingRate = 1; //Shots per second
     public float ProjectileDamage = 0.4f;
 
@@ -99,6 +99,19 @@ public class Shooting1 : MonoBehaviour //by serega
         Mode = ShootingMode.Automatic;
     }
 
+    public void AimToTarget(int ss)
+    {
+        Ray ray = Camera.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, Mask))
+        {
+            Mode = ShootingMode.Manual;
+            StopCoroutine(Shooting);
+            IntelectCreeps newTarget = hit.collider.gameObject.GetComponent<IntelectCreeps>();
+            Target = newTarget;
+            StartCoroutine(Shooting);
+        }
+    }
+
     private void ShootProjectile()
     {
         if (Mode == ShootingMode.Automatic)
@@ -125,10 +138,7 @@ public class Shooting1 : MonoBehaviour //by serega
                 }
             }
         }
-        else if (Mode == ShootingMode.Manual)
-        {
 
-        }
         if (Input.GetMouseButtonDown(0))
         {
             Ray TheRay = Camera.ScreenPointToRay(Input.mousePosition);

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,20 +6,24 @@ using UnityEngine.AI;
 public class IntelectCreeps : MonoBehaviour
 {
     [Header("�������� �������������")]
-    public float speed = 1;
+    public float speed;
+    public float Speed { get => speed; set { speed = value; behavior.speed = value; } }
     [Header("��������� �����, ��� ��������� 1, ��� ��������� ��� ���������")]
-    public float range = 1;
+    public float range;
     [Header("��������� ����� ���������� ��������")]
-    public float maxHealthPoint = 1f;
+    public float maxHealthPoint;
+
+    public float AttackSpeed;
 
     public float currentHealthPoint;
+
+
 
     public bool IsAlive = true; // Indicator if the enemy is alive  @Serega
     [Header("��������� ����� ���������� �����")]
     public float attackDamage = 10;
     [Header("���������� ����������������� ����������� �������� 0.1, ������ � �������������!")]
-    public float scale = 0.1f;
-    GameObject Tawer;
+    TowerScript Tawer;
 
     [SerializeField]
     private GameObject SelectionIndicator;
@@ -30,16 +34,33 @@ public class IntelectCreeps : MonoBehaviour
     public static Vector3 post;
     // Start is called before the first frame update
     public GameObject pl;
+    [SerializeField]
+    private float attackRange;
+
     public void GetDamage(float damage)
     {
         currentHealthPoint -= damage;
 
-        if (currentHealthPoint <= 0)
+        if (currentHealthPoint <= 0 && IsAlive)
         {
             IsAlive = false;
+
+            switch (gameObject.name) //adding points
+            {
+                case "Simple Skeleton(Clone)": FindObjectOfType<score>().IncreaseScore(0); break;
+                case "Heavy Skeleton(Clone)": FindObjectOfType<score>().IncreaseScore(1); break;
+                
+            }
+
             FindObjectOfType<Spawnr>().SpawnedEnemies.Remove(gameObject);
+            enemyAnimator.SetTrigger("Death");
+            behavior.isStopped = true;
+            Destroy(gameObject, 5);
         }
+
+
     }
+
 
     public void Select()
     {
@@ -55,7 +76,7 @@ public class IntelectCreeps : MonoBehaviour
     {
         if (selectplane.plate == true)
         {
-            Tawer = GameObject.FindGameObjectWithTag("Tawer");
+            Tawer = GameObject.FindGameObjectWithTag("Tawer").GetComponent<TowerScript>();
             if (Tawer == null)
             {
                 Destroy(this);
@@ -65,6 +86,9 @@ public class IntelectCreeps : MonoBehaviour
             currentHealthPoint = maxHealthPoint;
             MoveCreep();
         }
+
+
+        enemyAnimator.SetFloat("Attack Speed", AttackSpeed);
     }
 
     // Update is called once per frame
@@ -76,22 +100,17 @@ public class IntelectCreeps : MonoBehaviour
             timerAction += Time.deltaTime;
             time += Time.deltaTime;
             behavior.SetDestination(post);
-            if (currentHealthPoint <= 0)//������ ����� ���� �� ������ 0
-            {
-                Death();
-                behavior.isStopped = true;
-                if (timerAction >= 5)
-                {
-                    Destroy(gameObject);
-                }
 
-            }
-            else
+            if (IsAlive)
             {
-                if (Vector3.Distance(post, transform.position) <= Mathf.Abs(behavior.stoppingDistance))//���� �� ����������� �� ��������
+                if (Vector3.Distance(post, transform.position) <= behavior.stoppingDistance)//���� �� ����������� �� ��������
                 {
-                    Attack();
-                    behavior.isStopped = true;
+                    enemyAnimator.SetBool("Attack", true);
+                }
+                else
+                {
+                    enemyAnimator.SetBool("Attack", false);
+                    behavior.SetDestination(Tawer.transform.position);
                 }
 
                 if (behavior.isOnNavMesh == false)
@@ -108,39 +127,15 @@ public class IntelectCreeps : MonoBehaviour
         behavior = GetComponent<NavMeshAgent>();
         behavior.SetDestination(post);
         enemyAnimator.Play("Run");
-        behavior.speed = speed * scale;
-        behavior.stoppingDistance = range * 0.6f * scale;//��������� ���������
+        behavior.speed = speed;
+        behavior.stoppingDistance = attackRange;
     }
 
     void Attack()
     {
+        Tawer.DealDamage(attackDamage);
 
-        enemyAnimator.SetBool("Attack", true);
-        enemyAnimator.SetFloat("Cooldown", time);
-        if (timerAction > 5)
-        {
-            Tawer.GetComponent<TowerScript>().DealDamage(attackDamage);
-            timerAction = 0;
-        }
-        if (time > 2)
-        {
-            time = 0;
-        }
     }
 
-    public void Death()
-    {
-        if (!enemyAnimator.GetBool("Death"))
-        {
-            enemyAnimator.SetBool("Death", true);
-            timerAction = 0;
-        }
-        else
-        {
 
-        }
-
-
-        // Destroy(gameObject);
-    }
 }

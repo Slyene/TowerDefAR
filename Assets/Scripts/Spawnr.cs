@@ -32,26 +32,55 @@ public class Spawnr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Tawer = GameObject.FindGameObjectWithTag("Tawer");
       //  pla = GameObject.FindGameObjectWithTag("pla");
         post = Tawer.transform.position;
       // pla.transform.position = post;
         if (selectplane.plate == true)
         {
-            SpawnCrip();
+            time += Time.deltaTime;
 
-            ChangeStep();
+            if ((time >= interval) && (enemiCauntInBatel < enemiCaunt))
+            {
+                SpawnedEnemies.Add(Instantiate
+                    (
+                    enemiPrefab[MobSpawn(Random.Range(1, 100))],
+                    RandomPointOnCircleEdge(radius) + post,
+                    enemiPrefab[0].transform.rotation
+                    )); // Added to the list of spawned enemies @Serega
+                enemiCauntInBatel++;
+                time = 0f;
+            }
+
+            if ((time >= 10f) && (enemiCauntInBatel == enemiCaunt))
+            {
+                for (int i = 0; i < spawnPercent.Length - 1; i++)
+                {
+                    if (spawnPercent[i] > 0)
+                    {
+                        if (spawnPercent[i + 1] != 95)
+                        {
+                            spawnPercent[i] -= 5;
+                            spawnPercent[i + 1] += 5;
+                        }
+                    }
+                }
+
+                enemiCaunt += 3;
+                enemiCauntInBatel = 0;
+            }
 
 
         }
     }
-    private Vector3 RandomPointOnCircleEdge(float radius)//случайная точка на окружности
+    private Vector3 RandomPointOnCircleEdge(float radius)
     {
         var vector2 = Random.insideUnitCircle.normalized * (radius - mobSceal);
         return new Vector3(vector2.x, 0, vector2.y);
     }
 
-    private int MobSpawn(int mobChance)//шанс спавна мобов
+    private int MobSpawn(int mobChance)
     {
         int i = 0;
        while(i < spawnPercent.Length)
@@ -67,43 +96,5 @@ public class Spawnr : MonoBehaviour
             }
         }
         return -1;
-    }
-
-    private void SpawnCrip()//спав крипов
-    {
-        time += Time.deltaTime;
-
-        if ((time >= interval) && (enemiCauntInBatel < enemiCaunt))
-        {
-            SpawnedEnemies.Add(Instantiate
-                (
-                enemiPrefab[MobSpawn(Random.Range(1, 100))],
-                RandomPointOnCircleEdge(radius) + post,
-                enemiPrefab[0].transform.rotation
-                )); // Added to the list of spawned enemies @Serega
-            enemiCauntInBatel++;
-            time = 0f;
-        }
-    }
-
-    private void ChangeStep()//следущая волна
-    {
-        if ((time >= 10f) && (enemiCauntInBatel == enemiCaunt))
-        {
-            for (int i = 0; i < spawnPercent.Length - 1; i++)
-            {
-                if (spawnPercent[i] > 0)
-                {
-                    if (spawnPercent[i + 1] != 95)
-                    {
-                        spawnPercent[i] -= 5;
-                        spawnPercent[i + 1] += 5;
-                    }
-                }
-            }
-
-            enemiCaunt += 3;
-            enemiCauntInBatel = 0;
-        }
     }
 }
