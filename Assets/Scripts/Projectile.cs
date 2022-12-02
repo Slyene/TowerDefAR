@@ -9,9 +9,6 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private float Damage = 0.3f;
     private TowerScript Tower;
-    // Start is called before the first frame update
-
-
 
     public void Initialize(IntelectCreeps target, float damage, float speed)
     {
@@ -22,26 +19,26 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        ParticleSystem sys = GetComponentInChildren<ParticleSystem>();
-        sys.Play();
-
         Tower = FindObjectOfType<TowerScript>();
     }
 
     private void FixedUpdate()
     {
-        if (Target != null)
+        //Moving the projectile towards the target
+        if (Target != null) //If the target exists
         {
             Vector3 destination = new Vector3(Target.transform.position.x, Target.transform.position.y + Target.transform.localScale.y / 2, Target.transform.position.z);
-            if (Vector3.Distance(transform.position, destination) > 0.01)
+            if (Vector3.Distance(transform.position, destination) > 0.01) //If not approached the target yet
             {
-                transform.rotation = Quaternion.LookRotation(destination - transform.position);
-                transform.position += transform.forward.normalized * Speed * Time.deltaTime;
+                transform.rotation = Quaternion.LookRotation(destination - transform.position); //Rotate towards the target
+                transform.position += transform.forward.normalized * Speed * Time.deltaTime; //Go towards the target
             }
-            else
+            else //If reached the target
             {
+                //Damage the target
                 Target.GetComponent<IntelectCreeps>().GetDamage(Damage);
 
+                //Put an effect on the target if the tower has one
                 switch (Tower.EffectType)
                 {
                     case EffectType.Ignite:
@@ -55,17 +52,13 @@ public class Projectile : MonoBehaviour
                         break;
                 }
 
+                //Destroy the projectile
                 Destroy(gameObject, 0);
             }
         }
-        else
+        else //If the target doesn't exist, destroy the projectile
         {
             Destroy(gameObject, 0);
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

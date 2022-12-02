@@ -5,12 +5,9 @@ using UnityEngine.AI;
 
 public class IntelectCreeps : MonoBehaviour
 {
-    [Header("�������� �������������")]
     public float speed;
     public float Speed { get => speed; set { speed = value; behavior.speed = value; } }
-    [Header("��������� �����, ��� ��������� 1, ��� ��������� ��� ���������")]
     public float range;
-    [Header("��������� ����� ���������� ��������")]
     public float maxHealthPoint;
 
     public float AttackSpeed;
@@ -20,9 +17,8 @@ public class IntelectCreeps : MonoBehaviour
 
 
     public bool IsAlive = true; // Indicator if the enemy is alive  @Serega
-    [Header("��������� ����� ���������� �����")]
+
     public float attackDamage = 10;
-    [Header("���������� ����������������� ����������� �������� 0.1, ������ � �������������!")]
     TowerScript Tawer;
 
     [SerializeField]
@@ -45,15 +41,38 @@ public class IntelectCreeps : MonoBehaviour
         {
             IsAlive = false;
 
-            switch (gameObject.name) //adding points
-            {
-                case "Simple Skeleton(Clone)": FindObjectOfType<score>().IncreaseScore(0); break;
-                case "Heavy Skeleton(Clone)": FindObjectOfType<score>().IncreaseScore(1); break;
+            //switch (gameObject.name) //adding points
+            //{
+            //    case "Simple Skeleton(Clone)": FindObjectOfType<score>().IncreaseScore(0); break;
+            //    case "Heavy Skeleton(Clone)": FindObjectOfType<score>().IncreaseScore(1); break;
                 
+            //} Vragam na Zlo))))
+            if(gameObject.name == "Simple Skeleton(Clone)")
+            {
+                FindObjectOfType<score>().IncreaseScore(0); 
             }
-
+            else if(gameObject.name == "Heavy Skeleton(Clone)")
+            {
+                FindObjectOfType<score>().IncreaseScore(1);
+            }
+            else if(gameObject.name == "AceLich(Clone)")
+            {
+                FindObjectOfType<score>().IncreaseScore(2);
+            }
+            else if(gameObject.name == "DartLich(Clone)")
+            {
+                FindObjectOfType<score>().IncreaseScore(3);
+            }
+            else if(gameObject.name == "LowLich(Clone)")
+            {
+                FindObjectOfType<score>().IncreaseScore(4);
+            }
+            else if(gameObject.name == "Dragon(Clone)")
+            {
+                FindObjectOfType<score>().IncreaseScore(5);
+            }
             FindObjectOfType<Spawnr>().SpawnedEnemies.Remove(gameObject);
-            enemyAnimator.SetTrigger("Death");
+            enemyAnimator.SetTrigger("Death(Clone)");
             behavior.isStopped = true;
             Destroy(gameObject, 5);
         }
@@ -134,7 +153,6 @@ public class IntelectCreeps : MonoBehaviour
     void Attack()
     {
         Tawer.DealDamage(attackDamage);
-
     }
 
 

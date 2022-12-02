@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1728991876231251513}
   - component: {fileID: 2224906349815969265}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Ice Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

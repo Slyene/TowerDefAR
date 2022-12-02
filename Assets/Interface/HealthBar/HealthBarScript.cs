@@ -4,24 +4,15 @@ using UnityEngine.UI;
 public class HealthBarScript : MonoBehaviour
 {
     public Slider HealthBar;
-    public Text text;
     public Color Low, High;
 
-    private TowerScript tower;
-
-    //// Start is called before the first frame update
-    void Start()
+    public void ChangingHealthBars(float curHP, float maxHP)
     {
-        tower = FindObjectOfType<TowerScript>();
-        HealthBar.maxValue = tower.healPoint;
-    }
-
-    //// Update is called once per frame
-    void Update()
-    {
-        HealthBar.value = tower.curHP;
-        HealthBar.maxValue = tower.healPoint;
-        text.text = tower.curHP + " / " + tower.healPoint;
+        HealthBar.maxValue = maxHP;
+        HealthBar.value = curHP;
+        
+        HealthBar.GetComponentInChildren<Text>().text = curHP + " / " + maxHP;
         HealthBar.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(Low, High, HealthBar.normalizedValue);
+        if (curHP <= 0) { Application.Quit(); }
     }
 }

@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a251b4f9c6632449a7ee7efe768bc2, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -255,9 +255,9 @@ GameObject:
   - component: {fileID: 7466582787204459335}
   - component: {fileID: 7466582787204459330}
   - component: {fileID: 7466582787204459329}
-  - component: {fileID: 7466582787204459328}
   - component: {fileID: 6039211039230130480}
   - component: {fileID: 6039211039230130481}
+  - component: {fileID: 9173370324313742411}
   m_Layer: 0
   m_Name: Ice Tower
   m_TagString: Tawer
@@ -331,31 +331,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6825687b2e2ff47aa21a63f510aa79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healPoint: 300
-  curHP: 100
+  MaxHealth: 900
+  curHP: 0
   EffectType: 2
   EffectStrength: 15
   EffectDuration: 5
---- !u!114 &7466582787204459328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7466582787204459331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2312c41308b2f07478b570e2f428779b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 320949834696518096, guid: 777ab30de091e27449b4fe594e55ba36, type: 3}
-  Gun: {fileID: 9139613731593144048}
-  ProjectileSpeed: 0.3
-  ShootingRate: 1.5
-  ProjectileDamage: 80
-  Mode: 1
-  target: {fileID: 0}
-  Camera: {fileID: 0}
+  HealthLevel: 1
+  AttackLevel: 1
+  AttackSpeedLevel: 1
+  HealthUpgradingPrice: 1000
+  AttackUpgradingPrice: 1000
+  AttackSpeedUpgradingPrice: 1000
 --- !u!208 &6039211039230130480
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -384,6 +370,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d49b7251aaa204ea30ff8a7730e5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9173370324313742411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7466582787204459331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0efca41effb3ec044a77fbf181aed96b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 320949834696518096, guid: 777ab30de091e27449b4fe594e55ba36, type: 3}
+  Gun: {fileID: 9139613731593144048}
+  ProjectileSpeed: 0.1
+  ShootingRate: 1
+  ProjectileDamage: 0.4
+  target: {fileID: 0}
+  Camera: {fileID: 0}
 --- !u!1 &7466582787290010257
 GameObject:
   m_ObjectHideFlags: 0
