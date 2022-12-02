@@ -13,15 +13,15 @@ public class HealthBarScript : MonoBehaviour
     void Start()
     {
         tower = FindObjectOfType<TowerScript>();
-        HealthBar.maxValue = tower.MaxHealth;
+        HealthBar.maxValue = tower.healPoint;
     }
 
     //// Update is called once per frame
     void Update()
     {
         HealthBar.value = tower.curHP;
-        HealthBar.maxValue = tower.MaxHealth;
-        text.text = tower.curHP + " / " + tower.MaxHealth;
+        HealthBar.maxValue = tower.healPoint;
+        text.text = tower.curHP + " / " + tower.healPoint;
         HealthBar.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(Low, High, HealthBar.normalizedValue);
     }
 }

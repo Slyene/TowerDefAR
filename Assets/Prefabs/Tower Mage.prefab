@@ -367,11 +367,9 @@ GameObject:
   - component: {fileID: 3769854893352215792}
   - component: {fileID: 3769854893352215795}
   - component: {fileID: 2528692528173711954}
-  - component: {fileID: 1793089062}
-  - component: {fileID: 1793089063}
   m_Layer: 0
-  m_Name: Mechanical Tower
-  m_TagString: Tawer
+  m_Name: Tower Mage
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -425,7 +423,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 3769854893352215793}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.394521
   m_Height: 1.380258
   m_Direction: 1
@@ -442,17 +440,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6825687b2e2ff47aa21a63f510aa79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1000
+  healPoint: 100
   curHP: 0
-  EffectType: 4
-  EffectStrength: 10
-  EffectDuration: 0
-  HealthLevel: 1
-  AttackLevel: 1
-  AttackSpeedLevel: 1
-  HealthUpgradingPrice: 1000
-  AttackUpgradingPrice: 1000
-  AttackSpeedUpgradingPrice: 1000
 --- !u!114 &2528692528173711954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,41 +454,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2312c41308b2f07478b570e2f428779b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 320949834696518096, guid: 884ba98c1cc696645ad98c560193ba4b, type: 3}
+  ProjectilePrefab: {fileID: 1188712704350371298, guid: 2e53406a3f406594cbb292ad20ccfe7d, type: 3}
   Gun: {fileID: 2767244423763023527}
-  ProjectileSpeed: 0.3
-  ShootingRate: 1
-  ProjectileDamage: 20
-  target: {fileID: 0}
+  ProjectileSpeed: 1e-10
   Camera: {fileID: 0}
---- !u!208 &1793089062
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3769854893352215793}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.15777, y: 2.22, z: 0.15777}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 0
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
---- !u!114 &1793089063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3769854893352215793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55d49b7251aaa204ea30ff8a7730e5ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3769854893431157670
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +598,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 60554bc3a9b76f741a3c3abef86aca15, type: 2}
+  - {fileID: 2100000, guid: 6e06b6d0c696f9544b327c597d334766, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
