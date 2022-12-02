@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyHeal : MonoBehaviour
 {
-    [Header("Назначаем здесь количество здоровья")]
-    public float maxHealthPoint = 1;
+    [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+    public float maxHealthPoint = 5;
 
     float currentHealthPoint;
     IntelectCreeps intelectCreepsScript;
@@ -14,14 +14,14 @@ public class EnemyHeal : MonoBehaviour
     {
         currentHealthPoint -= damage;
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        if (currentHealthPoint <= 0)//смерть крипа если хп меньше 0
+        if (currentHealthPoint <= 0)//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 0
         {
-            intelectCreepsScript.Death();
+          //  intelectCreepsScript.Death();
         }
     }
 }

@@ -88,7 +88,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Planemarkerprefab: {fileID: 0}
-  spawnNewPlateAndCastle: {fileID: 0}
+  spawnNewCastle: {fileID: 0}
+  spawnNewPlate: {fileID: 0}
+  spawnNewSpawner: {fileID: 0}
 --- !u!1 &7884410681632988487
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +104,7 @@ GameObject:
   - component: {fileID: 7884410681632988482}
   - component: {fileID: 7884410681632988483}
   - component: {fileID: 7884410681632988480}
+  - component: {fileID: 992398907726927321}
   m_Layer: 0
   m_Name: AR Camera
   m_TagString: Untagged
@@ -209,3 +212,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UseCustomMaterial: 0
   m_CustomMaterial: {fileID: 0}
+--- !u!81 &992398907726927321
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884410681632988487}
+  m_Enabled: 1
